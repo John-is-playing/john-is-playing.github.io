@@ -10,126 +10,205 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* 文档页面特有样式 */
+        .docs-section {
+            padding: 6rem 0;
+            background-color: white;
+        }z
+        
+        .docs-hero {
+            background: linear-gradient(135deg, #3a86ff 0%, #8338ec 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .docs-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .docs-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    
         .docs-container {
             display: flex;
             min-height: 100vh;
-        }
-        .sidebar {
-            width: 250px;
             background-color: #f5f5f5;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: white;
             padding: 2rem 0;
             border-right: 1px solid #e0e0e0;
             position: sticky;
             top: 80px;
             height: calc(100vh - 80px);
             overflow-y: auto;
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05);
         }
+        
         .sidebar-nav {
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
+        
         .sidebar-nav h3 {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: #333;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
         }
+        
         .sidebar-nav ul {
             list-style: none;
             margin-bottom: 2rem;
         }
+        
         .sidebar-nav li {
             margin-bottom: 0.5rem;
         }
+        
         .sidebar-nav a {
             text-decoration: none;
             color: #666;
             display: block;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
+        
         .sidebar-nav a:hover {
             background-color: #e3f2fd;
             color: #3a86ff;
+            transform: translateX(5px);
         }
+        
         .main-content {
             flex: 1;
-            padding: 2rem;
+            padding: 3rem;
+            background-color: #f5f5f5;
         }
-        .docs-header {
-            margin-bottom: 3rem;
+        
+        .content-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
-        .docs-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #333;
+        
+        .content-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
         }
-        .docs-header p {
-            font-size: 1.1rem;
-            color: #666;
-        }
-        .api-section {
-            margin-bottom: 3rem;
-        }
-        .api-section h2 {
+        
+        .content-card h2 {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             color: #333;
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.75rem;
             border-bottom: 2px solid #3a86ff;
         }
-        .api-section h3 {
+        
+        .content-card h3 {
             font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: #333;
+            margin-top: 2rem;
         }
-        .api-section p {
-            margin-bottom: 1rem;
+        
+        .content-card p {
+            margin-bottom: 1.5rem;
             color: #666;
             line-height: 1.6;
         }
-        .api-section ul {
-            margin-bottom: 1rem;
+        
+        .content-card ul {
+            margin-bottom: 1.5rem;
             padding-left: 2rem;
         }
-        .api-section li {
-            margin-bottom: 0.5rem;
+        
+        .content-card li {
+            margin-bottom: 0.75rem;
             color: #666;
+            line-height: 1.5;
         }
+        
         .code-block {
             background-color: #f8f9fa;
             border-radius: 8px;
             padding: 1.5rem;
             overflow-x: auto;
             border-left: 4px solid #3a86ff;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
+        
         .code-block pre {
             margin: 0;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
             font-size: 0.95rem;
             line-height: 1.5;
         }
+        
         .code-block code {
             color: #333;
         }
+        
         .back-home {
             display: inline-block;
             margin-bottom: 2rem;
             color: #3a86ff;
             text-decoration: none;
             font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #3a86ff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
+        
         .back-home:hover {
-            text-decoration: underline;
+            background-color: #3a86ff;
+            color: white;
+            text-decoration: none;
         }
+        
+        .btn-primary {
+            background-color: #3a86ff;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
         @media (max-width: 992px) {
             .docs-container {
                 flex-direction: column;
             }
+            
             .sidebar {
                 width: 100%;
                 height: auto;
@@ -137,14 +216,39 @@
                 border-right: none;
                 border-bottom: 1px solid #e0e0e0;
             }
+            
             .sidebar-nav {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 1rem;
+                gap: 2rem;
+                justify-content: center;
             }
+            
             .sidebar-nav > div {
                 flex: 1;
                 min-width: 200px;
+            }
+            
+            .main-content {
+                padding: 2rem;
+            }
+            
+            .content-card {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .docs-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -165,13 +269,21 @@
                 <a href="../index.html">主页</a>
                 <a href="../index.html#features">特性</a>
                 <a href="../index.html#quickstart">快速上手</a>
-                <a href="index.html" class="active">API文档</a>
+                <a href="index.html">API文档</a>
                 <a href="https://github.com/john-is-playing/e2e_type_converter" target="_blank" class="btn-github">
                     <i class="fab fa-github"></i> GitHub
                 </a>
             </div>
         </div>
     </nav>
+
+    <!-- 文档英雄区域 -->
+    <section class="docs-hero">
+        <div class="container">
+            <h1>API文档</h1>
+            <p>详细的 e2e_type_converter 库API参考文档，包括核心类和函数的使用方法</p>
+        </div>
+    </section>
 
     <div class="docs-container">
         <!-- 侧边栏导航 -->
@@ -194,7 +306,7 @@
                 <div>
                     <h3>参考文档</h3>
                     <ul>
-                        <li><a href="e2e_type_converter.core.html" target="_blank">完整API文档</a></li>
+                        <li><a href="full-api.html" target="_blank">完整API文档</a></li>
                     </ul>
                 </div>
             </nav>
@@ -206,33 +318,29 @@
                 <i class="fas fa-arrow-left"></i> 返回主页
             </a>
 
-            <div class="docs-header">
-                <h1>API文档</h1>
-                <p>详细的 e2e_type_converter 库API参考文档，包括核心类和函数的使用方法。</p>
-            </div>
+            <div class="content-card">
+                <section id="typeconverter">
+                    <h2>TypeConverter 类</h2>
+                    <p><code>TypeConverter</code> 是库的核心类，提供了第三方库类型之间的互转功能。它支持双向转换，自动处理不同库之间的转换细节，包括GPU张量的设备管理。</p>
+                    
+                    <h3>主要方法</h3>
+                    <ul>
+                        <li><code>convert(obj, target_type)</code> - 通用类型转换方法</li>
+                        <li><code>numpy_to_xarray(obj)</code> - numpy 转换为 xarray</li>
+                        <li><code>xarray_to_numpy(obj)</code> - xarray 转换为 numpy</li>
+                        <li><code>torch_to_numpy(obj)</code> - torch 转换为 numpy</li>
+                        <li><code>numpy_to_torch(obj)</code> - numpy 转换为 torch</li>
+                        <li><code>jax_to_numpy(obj)</code> - jax 转换为 numpy</li>
+                        <li><code>numpy_to_jax(obj)</code> - numpy 转换为 jax</li>
+                        <li><code>tensorflow_to_numpy(obj)</code> - tensorflow 转换为 numpy</li>
+                        <li><code>numpy_to_tensorflow(obj)</code> - numpy 转换为 tensorflow</li>
+                        <li><code>pandas_to_numpy(obj)</code> - pandas 转换为 numpy</li>
+                        <li><code>numpy_to_pandas(obj)</code> - numpy 转换为 pandas</li>
+                    </ul>
 
-            <section id="typeconverter" class="api-section">
-                <h2>TypeConverter 类</h2>
-                <p><code>TypeConverter</code> 是库的核心类，提供了第三方库类型之间的互转功能。</p>
-                
-                <h3>主要方法</h3>
-                <ul>
-                    <li><code>convert(obj, target_type)</code> - 通用类型转换方法</li>
-                    <li><code>numpy_to_xarray(obj)</code> - numpy 转换为 xarray</li>
-                    <li><code>xarray_to_numpy(obj)</code> - xarray 转换为 numpy</li>
-                    <li><code>torch_to_numpy(obj)</code> - torch 转换为 numpy</li>
-                    <li><code>numpy_to_torch(obj)</code> - numpy 转换为 torch</li>
-                    <li><code>jax_to_numpy(obj)</code> - jax 转换为 numpy</li>
-                    <li><code>numpy_to_jax(obj)</code> - numpy 转换为 jax</li>
-                    <li><code>tensorflow_to_numpy(obj)</code> - tensorflow 转换为 numpy</li>
-                    <li><code>numpy_to_tensorflow(obj)</code> - numpy 转换为 tensorflow</li>
-                    <li><code>pandas_to_numpy(obj)</code> - pandas 转换为 numpy</li>
-                    <li><code>numpy_to_pandas(obj)</code> - numpy 转换为 pandas</li>
-                </ul>
-
-                <h3>使用示例</h3>
-                <div class="code-block">
-                    <pre><code>from e2e_type_converter import TypeConverter
+                    <h3>使用示例</h3>
+                    <div class="code-block">
+                        <pre><code>from e2e_type_converter import TypeConverter
 import numpy as np
 import torch
 
@@ -245,27 +353,29 @@ print(type(tensor))  # 输出: &lt;class 'torch.Tensor'&gt;
 tensor = torch.tensor([4, 5, 6])
 arr = TypeConverter.torch_to_numpy(tensor)
 print(type(arr))  # 输出: &lt;class 'numpy.ndarray'&gt;</code></pre>
-                </div>
-            </section>
+                    </div>
+                </section>
+            </div>
 
-            <section id="e2e-functions" class="api-section">
-                <h2>e2e_* 函数</h2>
-                <p>库提供了一系列与Python内置函数兼容的转换函数，支持所有类型的转换。</p>
-                
-                <h3>可用函数</h3>
-                <ul>
-                    <li><code>e2e_list(obj)</code> - 转换为列表</li>
-                    <li><code>e2e_str(obj)</code> - 转换为字符串</li>
-                    <li><code>e2e_int(obj)</code> - 转换为整数</li>
-                    <li><code>e2e_float(obj)</code> - 转换为浮点数</li>
-                    <li><code>e2e_dict(obj)</code> - 转换为字典</li>
-                    <li><code>e2e_set(obj)</code> - 转换为集合</li>
-                    <li><code>e2e_tuple(obj)</code> - 转换为元组</li>
-                </ul>
+            <div class="content-card">
+                <section id="e2e-functions">
+                    <h2>e2e_* 函数</h2>
+                    <p>库提供了一系列与Python内置函数兼容的转换函数，支持所有类型的转换。这些函数保持了与Python内置函数的兼容性，同时增强了对第三方库类型的支持。</p>
+                    
+                    <h3>可用函数</h3>
+                    <ul>
+                        <li><code>e2e_list(obj)</code> - 转换为列表</li>
+                        <li><code>e2e_str(obj)</code> - 转换为字符串</li>
+                        <li><code>e2e_int(obj)</code> - 转换为整数</li>
+                        <li><code>e2e_float(obj)</code> - 转换为浮点数</li>
+                        <li><code>e2e_dict(obj)</code> - 转换为字典</li>
+                        <li><code>e2e_set(obj)</code> - 转换为集合</li>
+                        <li><code>e2e_tuple(obj)</code> - 转换为元组</li>
+                    </ul>
 
-                <h3>使用示例</h3>
-                <div class="code-block">
-                    <pre><code>from e2e_type_converter import e2e_list, e2e_str, e2e_int
+                    <h3>使用示例</h3>
+                    <div class="code-block">
+                        <pre><code>from e2e_type_converter import e2e_list, e2e_str, e2e_int
 import numpy as np
 
 # 基本类型转换
@@ -277,58 +387,65 @@ e2e_int("123")  # 输出: 123
 arr = np.array([1, 2, 3])
 e2e_list(arr)  # 输出: [1, 2, 3]
 e2e_str(arr)  # 输出: "[1, 2, 3]"</code></pre>
-                </div>
-            </section>
+                    </div>
+                </section>
+            </div>
 
-            <section id="standard-types" class="api-section">
-                <h2>标准类型转换</h2>
-                <p>支持所有Python标准数据类型之间的转换，包括：</p>
-                <ul>
-                    <li>list</li>
-                    <li>str</li>
-                    <li>int</li>
-                    <li>float</li>
-                    <li>dict</li>
-                    <li>set</li>
-                    <li>tuple</li>
-                </ul>
+            <div class="content-card">
+                <section id="standard-types">
+                    <h2>标准类型转换</h2>
+                    <p>支持所有Python标准数据类型之间的转换，包括：</p>
+                    <ul>
+                        <li>list</li>
+                        <li>str</li>
+                        <li>int</li>
+                        <li>float</li>
+                        <li>dict</li>
+                        <li>set</li>
+                        <li>tuple</li>
+                    </ul>
 
-                <h3>特殊处理</h3>
-                <ul>
-                    <li><strong>None 值</strong> - 转换为对应类型的空值（如 []、""、0）</li>
-                    <li><strong>布尔值</strong> - 转换为对应类型的真实值</li>
-                    <li><strong>集合类型</strong> - 支持不同集合类型之间的转换</li>
-                </ul>
-            </section>
+                    <h3>特殊处理</h3>
+                    <ul>
+                        <li><strong>None 值</strong> - 转换为对应类型的空值（如 []、""、0）</li>
+                        <li><strong>布尔值</strong> - 转换为对应类型的真实值</li>
+                        <li><strong>集合类型</strong> - 支持不同集合类型之间的转换</li>
+                    </ul>
+                </section>
+            </div>
 
-            <section id="third-party-types" class="api-section">
-                <h2>第三方库类型转换</h2>
-                <p>支持主流科学计算库类型之间的互转，包括：</p>
-                <ul>
-                    <li>numpy</li>
-                    <li>cupy</li>
-                    <li>scipy</li>
-                    <li>pandas</li>
-                    <li>torch</li>
-                    <li>xarray</li>
-                    <li>jax</li>
-                    <li>tensorflow</li>
-                </ul>
+            <div class="content-card">
+                <section id="third-party-types">
+                    <h2>第三方库类型转换</h2>
+                    <p>支持主流科学计算库类型之间的互转，包括：</p>
+                    <ul>
+                        <li>numpy</li>
+                        <li>cupy</li>
+                        <li>scipy</li>
+                        <li>pandas</li>
+                        <li>torch</li>
+                        <li>xarray</li>
+                        <li>jax</li>
+                        <li>tensorflow</li>
+                    </ul>
 
-                <h3>自动依赖检测</h3>
-                <p>库会自动检测第三方库是否可用，当库不可用时会给出明确的错误提示，不会导致程序崩溃。</p>
+                    <h3>自动依赖检测</h3>
+                    <p>库会自动检测第三方库是否可用，当库不可用时会给出明确的错误提示，不会导致程序崩溃。</p>
 
-                <h3>GPU支持</h3>
-                <p>对于支持GPU的库（如torch、cupy），会自动处理设备管理，确保转换过程的正确性。</p>
-            </section>
+                    <h3>GPU支持</h3>
+                    <p>对于支持GPU的库（如torch、cupy），会自动处理设备管理，确保转换过程的正确性。</p>
+                </section>
+            </div>
 
-            <section class="api-section">
-                <h2>完整API文档</h2>
-                <p>以下是使用 pydoc 生成的完整API文档，包含所有类、方法和函数的详细说明：</p>
-                <a href="e2e_type_converter.core.html" target="_blank" class="btn-primary">
-                    查看完整API文档
-                </a>
-            </section>
+            <div class="content-card">
+                <section>
+                    <h2>完整API文档</h2>
+                    <p>以下是完整的API文档，包含所有类、方法和函数的详细说明：</p>
+                    <a href="full-api.html" target="_blank" class="btn-primary">
+                        查看完整API文档
+                    </a>
+                </section>
+            </div>
         </main>
     </div>
 
@@ -368,11 +485,29 @@ e2e_str(arr)  # 输出: "[1, 2, 3]"</code></pre>
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 20,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 }
             });
+        });
+
+        // 内容卡片动画
+        const contentCards = document.querySelectorAll('.content-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        contentCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
         });
     </script>
 </body>
