@@ -1,300 +1,337 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>Python: module everything2everything.core</title>
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-    body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-    }
-    .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    /* 导航栏 */
-    .navbar {
-        background-color: #ffffff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-    .navbar .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 20px;
-    }
-    .navbar-brand {
-        display: flex;
-        align-items: center;
-    }
-    .logo {
-        display: flex;
-        align-items: center;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #3a86ff;
-    }
-    .logo-icon {
-        margin-right: 10px;
-        font-size: 1.8rem;
-    }
-    .navbar-links {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-    }
-    .navbar-links a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-        transition: color 0.3s ease;
-    }
-    .navbar-links a:hover {
-        color: #3a86ff;
-    }
-    .btn-github {
-        background-color: #24292e;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-weight: 500;
-        transition: background-color 0.3s ease;
-    }
-    .btn-github:hover {
-        background-color: #2b3137;
-        color: white;
-    }
-    /* 文档内容 */
-    .doc-content {
-        background-color: white;
-        margin: 2rem 0;
-        padding: 2rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-    /* 标题样式 */
-    h1, h2, h3, h4 {
-        color: #333;
-        font-weight: 600;
-        margin-bottom: 1rem;
-    }
-    h1 {
-        font-size: 2rem;
-        border-bottom: 2px solid #3a86ff;
-        padding-bottom: 0.5rem;
-        margin-bottom: 2rem;
-    }
-    h2 {
-        font-size: 1.5rem;
-        margin-top: 2rem;
-        margin-bottom: 1.5rem;
-        color: #3a86ff;
-    }
-    h3 {
-        font-size: 1.2rem;
-        margin-top: 1.5rem;
-    }
-    /* 段落和列表 */
-    p {
-        margin-bottom: 1rem;
-        color: #666;
-    }
-    ul, ol {
-        margin-bottom: 1rem;
-        padding-left: 2rem;
-        color: #666;
-    }
-    li {
-        margin-bottom: 0.5rem;
-    }
-    /* 代码样式 */
-    code {
-        background-color: #f8f9fa;
-        padding: 0.2rem 0.4rem;
-        border-radius: 4px;
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-        font-size: 0.9rem;
-        color: #333;
-    }
-    pre {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 1.5rem;
-        overflow-x: auto;
-        border-left: 4px solid #3a86ff;
-        margin-bottom: 1.5rem;
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-        font-size: 0.9rem;
-        position: relative;
-    }
-    /* 表格样式 */
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 1.5rem;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    th, td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid #e0e0e0;
-    }
-    th {
-        background-color: #3a86ff;
-        color: white;
-        font-weight: 600;
-    }
-    tr:hover {
-        background-color: #f5f5f5;
-    }
-    /* 链接样式 */
-    a {
-        color: #3a86ff;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    /* 代码块复制按钮 */
-    .copy-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: rgba(255, 255, 255, 0.8);
-        border: none;
-        border-radius: 4px;
-        padding: 6px 10px;
-        cursor: pointer;
-        font-size: 14px;
-        color: #333;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .copy-button:hover {
-        background-color: #3a86ff;
-        color: white;
-    }
-    /* 页脚 */
-    footer {
-        background-color: #f5f5f5;
-        padding: 2rem 0;
-        border-top: 1px solid #e0e0e0;
-        margin-top: 2rem;
-    }
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 2rem;
-    }
-    .footer-logo {
-        max-width: 300px;
-    }
-    .footer-links {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .footer-links a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-        transition: color 0.3s ease;
-    }
-    .footer-links a:hover {
-        color: #3a86ff;
-    }
-    .footer-bottom {
-        margin-top: 2rem;
-        padding-top: 1rem;
-        border-top: 1px solid #e0e0e0;
-        text-align: center;
-        color: #666;
-    }
-    /* 响应式设计 */
-    @media (max-width: 768px) {
+    <meta charset="utf-8">
+    <title>everything2everything.core - 核心类型转换实现</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* 导航栏 */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
         .navbar .container {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3a86ff;
+        }
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.8rem;
         }
         .navbar-links {
-            flex-wrap: wrap;
-            justify-content: center;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
+        .navbar-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .navbar-links a:hover {
+            color: #3a86ff;
+        }
+        .btn-github {
+            background-color: #24292e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .btn-github:hover {
+            background-color: #2b3137;
+            color: white;
+        }
+        /* 文档内容 */
         .doc-content {
+            background-color: white;
+            margin: 2rem 0;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        /* 标题样式 */
+        h1, h2, h3, h4, h5 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid #3a86ff;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            color: #3a86ff;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: #3a86ff;
+            padding-left: 1rem;
+            border-left: 4px solid #3a86ff;
+        }
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #555;
+        }
+        /* 段落和列表 */
+        p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.8;
+        }
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            color: #666;
+        }
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        /* 代码样式 */
+        code {
+            background-color: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        pre {
+            background-color: #f8f9fa;
+            border-radius: 8px;
             padding: 1.5rem;
-            margin: 1rem;
+            overflow-x: auto;
+            border-left: 4px solid #3a86ff;
+            margin-bottom: 2rem;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+        }
+        /* 代码块复制按钮 */
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .copy-button:hover {
+            background-color: #3a86ff;
+            color: white;
+        }
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #3a86ff;
+            color: white;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        /* 卡片样式 */
+        .card {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3a86ff;
+        }
+        /* 提示框 */
+        .note {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        /* 页脚 */
+        footer {
+            background-color: #f5f5f5;
+            padding: 2rem 0;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 3rem;
         }
         .footer-content {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
         }
-    }
-    /* 自定义样式覆盖 */
-    .heading {
-        display: none;
-    }
-    .section {
-        margin-bottom: 2rem;
-    }
-    .bigsection {
-        font-size: 1.5rem;
-        color: #3a86ff;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-    }
-    .code {
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-        background-color: #f8f9fa;
-        padding: 0.2rem 0.4rem;
-        border-radius: 4px;
-    }
-    .singlecolumn {
-        width: 100%;
-    }
-    dl {
-        margin-bottom: 1.5rem;
-    }
-    dt {
-        font-weight: 600;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-        color: #333;
-    }
-    dd {
-        margin-left: 1.5rem;
-        margin-bottom: 1rem;
-        color: #666;
-    }
-    hr {
-        border: 1px solid #e0e0e0;
-        margin: 2rem 0;
-    }
-</style>
+        .footer-logo {
+            max-width: 300px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .footer-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #3a86ff;
+        }
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+        }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .navbar-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .doc-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+        /* 自定义样式 */
+        .module-info {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .function-signature {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            border-left: 3px solid #3a86ff;
+        }
+        .param-table {
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .param-table th {
+            width: 150px;
+        }
+        .returns-section {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .raises-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        .example-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -322,296 +359,828 @@
 
     <div class="container">
         <div class="doc-content">
+            <h1>everything2everything.core 模块文档</h1>
 
-<table class="heading">
-<tr class="heading-text decor">
-<td class="title">&nbsp;<br><strong class="title"><a href="everything2everything.html" class="white">everything2everything</a>.core</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cpotato%5Cdocuments%5Ctrae_projects%5Cjohn-is-playing.github.io%5Ceverything2everything%5Ccore.py">c:\users\potato\documents\trae_projects\john-is-playing.github.io\everything2everything\core.py</a></td></tr></table>
-    <p><span class="code">核心类型转换实现<br>
-&nbsp;<br>
-This&nbsp;module&nbsp;contains&nbsp;the&nbsp;core&nbsp;implementation&nbsp;of&nbsp;the&nbsp;type&nbsp;conversion&nbsp;compatibility&nbsp;layer,<br>
-including&nbsp;support&nbsp;for&nbsp;standard&nbsp;Python&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.</span></p>
-<p>
-<table class="section">
-<tr class="decor pkg-content-decor heading-text">
-<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+            <div class="module-info">
+                <h2>模块概述</h2>
+                <p><code>everything2everything.core</code> 模块是 everything2everything 库的核心实现，提供了全面的类型转换兼容层，支持所有Python标准数据类型和第三方库类型之间的双向转换。</p>
+                <p>该模块的主要功能包括：</p>
+                <ul>
+                    <li>支持所有Python标准数据类型之间的转换</li>
+                    <li>支持第三方库类型（如numpy、pandas、torch、tensorflow等）之间的互转</li>
+                    <li>提供与Python内置函数兼容的转换函数</li>
+                    <li>内置缓存机制，提升性能</li>
+                    <li>类型安全，提供明确的错误提示</li>
+                    <li>自动处理第三方库依赖检测</li>
+                </ul>
+            </div>
+
+            <h2>核心类</h2>
+
+            <h3>TypeConverter 类</h3>
+            <p><code>TypeConverter</code> 是库的核心类，提供了第三方库类型之间的互转功能，以及标准类型的转换方法。</p>
+
+            <h4>类定义</h4>
+            <pre><code>class TypeConverter:
+    """类型转换兼容层
     
-<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
-<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="builtins.html">builtins</a><br>
-</td><td class="multicolumn"><a href="sys.html">sys</a><br>
-</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
-<table class="section">
-<tr class="decor index-decor heading-text">
-<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
-    
-<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
-<td class="singlecolumn"><dl>
-<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
-</dt><dd>
-<dl>
-<dt class="heading-text"><a href="everything2everything.core.html#TypeConverter">TypeConverter</a>
-</dt></dl>
-</dd>
-</dl>
- <p>
-<table class="section">
-<tr class="decor title-decor heading-text">
-<td class="section-title" colspan=3>&nbsp;<br><a name="TypeConverter">class <strong>TypeConverter</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
-    
-<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
-<td class="decor title-decor" colspan=2><span class="code">类型转换兼容层<br>
-&nbsp;<br>
-A&nbsp;comprehensive&nbsp;type&nbsp;conversion&nbsp;compatibility&nbsp;layer&nbsp;that&nbsp;supports&nbsp;bidirectional<br>
-conversion&nbsp;between&nbsp;all&nbsp;standard&nbsp;Python&nbsp;data&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>&nbsp;</span></td></tr>
-<tr><td>&nbsp;</td>
-<td class="singlecolumn">Static methods defined here:<br>
-<dl><dt><a name="TypeConverter-convert"><strong>convert</strong></a>(obj, target_type)</dt><dd><span class="code">通用类型转换方法，支持第三方库类型之间的互转<br>
-&nbsp;<br>
-Generic&nbsp;type&nbsp;conversion&nbsp;method&nbsp;that&nbsp;supports&nbsp;conversion&nbsp;between&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象<br>
-&nbsp;&nbsp;&nbsp;&nbsp;target_type:&nbsp;目标类型，可以是以下字符串之一：<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'numpy',&nbsp;'cupy',&nbsp;'scipy',&nbsp;'pandas',&nbsp;'torch',&nbsp;'xarray',&nbsp;'jax',&nbsp;'tensorflow'<br>
-&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;转换后的对象<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;如果目标类型无效<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果无法转换输入对象</span></dd></dl>
+    A comprehensive type conversion compatibility layer that supports bidirectional
+    conversion between all standard Python data types and third-party library types.
+    """
+</code></pre>
 
-<dl><dt><a name="TypeConverter-jax_to_numpy"><strong>jax_to_numpy</strong></a>(obj)</dt><dd><span class="code">将jax数组转换为numpy数组<br>
-&nbsp;<br>
-Convert&nbsp;jax&nbsp;array&nbsp;to&nbsp;numpy&nbsp;array.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;jax.numpy.ndarray&nbsp;-&nbsp;要转换的jax数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是jax数组</span></dd></dl>
+            <h4>主要方法</h4>
 
-<dl><dt><a name="TypeConverter-numpy_to_jax"><strong>numpy_to_jax</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为jax数组<br>
-&nbsp;<br>
-Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;jax&nbsp;array.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;jax.numpy.ndarray&nbsp;-&nbsp;转换后的jax数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+            <h5>convert(obj, target_type)</h5>
+            <div class="function-signature">
+                def convert(obj, target_type):
+                    """通用类型转换方法，支持第三方库类型之间的互转"""
+            </div>
+            <p>通用类型转换方法，支持将任意类型转换为指定的目标类型。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any</td>
+                    <td>要转换的对象</td>
+                </tr>
+                <tr>
+                    <td>target_type</td>
+                    <td>str</td>
+                    <td>目标类型，可以是以下字符串之一：
+                        'numpy', 'cupy', 'scipy', 'pandas', 'torch', 'xarray', 'jax', 'tensorflow'
+                    </td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> 转换后的对象
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>ValueError</code> - 如果目标类型无效</li>
+                    <li><code>TypeError</code> - 如果无法转换输入对象</li>
+                </ul>
+            </div>
+            <div class="example-section">
+                <strong>示例：</strong>
+                <pre><code>from everything2everything import TypeConverter
+import numpy as np
 
-<dl><dt><a name="TypeConverter-numpy_to_pandas"><strong>numpy_to_pandas</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为pandas对象<br>
-&nbsp;<br>
-Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;pandas&nbsp;Series&nbsp;or&nbsp;DataFrame.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;pandas.Series&nbsp;or&nbsp;pandas.DataFrame&nbsp;-&nbsp;转换后的pandas对象<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;如果输入数组维度大于2</span></dd></dl>
+# 将numpy数组转换为torch张量
+arr = np.array([1, 2, 3])
+tensor = TypeConverter.convert(arr, 'torch')
+print(type(tensor))  # 输出: &lt;class 'torch.Tensor'&gt;
 
-<dl><dt><a name="TypeConverter-numpy_to_tensorflow"><strong>numpy_to_tensorflow</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为tensorflow&nbsp;Tensor<br>
-&nbsp;<br>
-Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;tensorflow&nbsp;Tensor.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tensorflow.Tensor&nbsp;-&nbsp;转换后的tensorflow张量<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+# 将torch张量转换为tensorflow张量
+tensor = TypeConverter.convert(tensor, 'tensorflow')
+print(type(tensor))  # 输出: &lt;class 'tensorflow.Tensor'&gt;</code></pre>
+            </div>
 
-<dl><dt><a name="TypeConverter-numpy_to_torch"><strong>numpy_to_torch</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为torch&nbsp;Tensor<br>
-&nbsp;<br>
-Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;torch&nbsp;Tensor.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;torch.Tensor&nbsp;-&nbsp;转换后的torch张量<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+            <h5>numpy_to_xarray(obj)</h5>
+            <div class="function-signature">
+                def numpy_to_xarray(obj):
+                    """将numpy数组转换为xarray DataArray"""
+            </div>
+            <p>将numpy数组转换为xarray DataArray，自动生成维度和坐标。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>numpy.ndarray</td>
+                    <td>要转换的numpy数组</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> xarray.DataArray - 转换后的xarray DataArray
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是numpy数组</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-numpy_to_xarray"><strong>numpy_to_xarray</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为xarray&nbsp;DataArray<br>
-&nbsp;<br>
-Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;xarray&nbsp;DataArray&nbsp;with&nbsp;automatically&nbsp;generated&nbsp;dimensions&nbsp;and&nbsp;coordinates.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;xarray.DataArray&nbsp;-&nbsp;转换后的xarray&nbsp;DataArray<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+            <h5>xarray_to_numpy(obj)</h5>
+            <div class="function-signature">
+                def xarray_to_numpy(obj):
+                    """将xarray DataArray转换为numpy数组"""
+            </div>
+            <p>将xarray DataArray或Dataset转换为numpy数组。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>xarray.DataArray 或 xarray.Dataset</td>
+                    <td>要转换的xarray对象</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> numpy.ndarray - 转换后的numpy数组
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是xarray对象</li>
+                    <li><code>ValueError</code> - 如果输入是空的xarray Dataset</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-pandas_to_numpy"><strong>pandas_to_numpy</strong></a>(obj)</dt><dd><span class="code">将pandas对象转换为numpy数组<br>
-&nbsp;<br>
-Convert&nbsp;pandas&nbsp;DataFrame&nbsp;or&nbsp;Series&nbsp;to&nbsp;numpy&nbsp;array.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;pandas.DataFrame&nbsp;or&nbsp;pandas.Series&nbsp;-&nbsp;要转换的pandas对象<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是pandas对象</span></dd></dl>
+            <h5>torch_to_numpy(obj)</h5>
+            <div class="function-signature">
+                def torch_to_numpy(obj):
+                    """将torch Tensor转换为numpy数组"""
+            </div>
+            <p>将torch Tensor转换为numpy数组，必要时从计算图中分离。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>torch.Tensor</td>
+                    <td>要转换的torch张量</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> numpy.ndarray - 转换后的numpy数组
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是torch张量</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-tensorflow_to_numpy"><strong>tensorflow_to_numpy</strong></a>(obj)</dt><dd><span class="code">将tensorflow&nbsp;Tensor转换为numpy数组<br>
-&nbsp;<br>
-Convert&nbsp;tensorflow&nbsp;Tensor&nbsp;to&nbsp;numpy&nbsp;array.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;tensorflow.Tensor&nbsp;-&nbsp;要转换的tensorflow张量<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是tensorflow张量</span></dd></dl>
+            <h5>numpy_to_torch(obj)</h5>
+            <div class="function-signature">
+                def numpy_to_torch(obj):
+                    """将numpy数组转换为torch Tensor"""
+            </div>
+            <p>将numpy数组转换为torch Tensor。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>numpy.ndarray</td>
+                    <td>要转换的numpy数组</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> torch.Tensor - 转换后的torch张量
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是numpy数组</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-to_dict"><strong>to_dict</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+            <h5>jax_to_numpy(obj)</h5>
+            <div class="function-signature">
+                def jax_to_numpy(obj):
+                    """将jax数组转换为numpy数组"""
+            </div>
+            <p>将jax数组转换为numpy数组。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>jax.numpy.ndarray</td>
+                    <td>要转换的jax数组</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> numpy.ndarray - 转换后的numpy数组
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是jax数组</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-to_float"><strong>to_float</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+            <h5>numpy_to_jax(obj)</h5>
+            <div class="function-signature">
+                def numpy_to_jax(obj):
+                    """将numpy数组转换为jax数组"""
+            </div>
+            <p>将numpy数组转换为jax数组。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>numpy.ndarray</td>
+                    <td>要转换的numpy数组</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> jax.numpy.ndarray - 转换后的jax数组
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是numpy数组</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-to_int"><strong>to_int</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+            <h5>tensorflow_to_numpy(obj)</h5>
+            <div class="function-signature">
+                def tensorflow_to_numpy(obj):
+                    """将tensorflow Tensor转换为numpy数组"""
+            </div>
+            <p>将tensorflow Tensor转换为numpy数组。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>tensorflow.Tensor</td>
+                    <td>要转换的tensorflow张量</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> numpy.ndarray - 转换后的numpy数组
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是tensorflow张量</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-to_list"><strong>to_list</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+            <h5>numpy_to_tensorflow(obj)</h5>
+            <div class="function-signature">
+                def numpy_to_tensorflow(obj):
+                    """将numpy数组转换为tensorflow Tensor"""
+            </div>
+            <p>将numpy数组转换为tensorflow Tensor。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>numpy.ndarray</td>
+                    <td>要转换的numpy数组</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> tensorflow.Tensor - 转换后的tensorflow张量
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是numpy数组</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-to_set"><strong>to_set</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+            <h5>pandas_to_numpy(obj)</h5>
+            <div class="function-signature">
+                def pandas_to_numpy(obj):
+                    """将pandas对象转换为numpy数组"""
+            </div>
+            <p>将pandas DataFrame或Series转换为numpy数组。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>pandas.DataFrame 或 pandas.Series</td>
+                    <td>要转换的pandas对象</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> numpy.ndarray - 转换后的numpy数组
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是pandas对象</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-to_str"><strong>to_str</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+            <h5>numpy_to_pandas(obj)</h5>
+            <div class="function-signature">
+                def numpy_to_pandas(obj):
+                    """将numpy数组转换为pandas对象"""
+            </div>
+            <p>将numpy数组转换为pandas Series或DataFrame。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>numpy.ndarray</td>
+                    <td>要转换的numpy数组</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> pandas.Series 或 pandas.DataFrame - 转换后的pandas对象
+            </div>
+            <div class="raises-section">
+                <strong>异常：</strong>
+                <ul>
+                    <li><code>TypeError</code> - 如果输入不是numpy数组</li>
+                    <li><code>ValueError</code> - 如果输入数组维度大于2</li>
+                </ul>
+            </div>
 
-<dl><dt><a name="TypeConverter-to_tuple"><strong>to_tuple</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+            <h4>标准类型转换方法</h4>
+            <p>TypeConverter 类还提供了一系列标准类型的转换方法，这些方法都使用了 <code>@conversion_cache</code> 装饰器，以提升性能。</p>
 
-<dl><dt><a name="TypeConverter-torch_to_numpy"><strong>torch_to_numpy</strong></a>(obj)</dt><dd><span class="code">将torch&nbsp;Tensor转换为numpy数组<br>
-&nbsp;<br>
-Convert&nbsp;torch&nbsp;Tensor&nbsp;to&nbsp;numpy&nbsp;array,&nbsp;detaching&nbsp;from&nbsp;computation&nbsp;graph&nbsp;if&nbsp;necessary.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;torch.Tensor&nbsp;-&nbsp;要转换的torch张量<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是torch张量</span></dd></dl>
+            <h5>to_list(obj)</h5>
+            <div class="function-signature">
+                @staticmethod
+                @conversion_cache
+                def to_list(obj):
+                    """转换为list"""
+            </div>
+            <p>将任意对象转换为列表。</p>
 
-<dl><dt><a name="TypeConverter-xarray_to_numpy"><strong>xarray_to_numpy</strong></a>(obj)</dt><dd><span class="code">将xarray&nbsp;DataArray转换为numpy数组<br>
-&nbsp;<br>
-Convert&nbsp;xarray&nbsp;DataArray&nbsp;or&nbsp;Dataset&nbsp;to&nbsp;numpy&nbsp;array.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;xarray.DataArray&nbsp;or&nbsp;xarray.Dataset&nbsp;-&nbsp;要转换的xarray对象<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Raises:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是xarray对象<br>
-&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;如果输入是空的xarray&nbsp;Dataset</span></dd></dl>
+            <h5>to_str(obj)</h5>
+            <div class="function-signature">
+                @staticmethod
+                @conversion_cache
+                def to_str(obj):
+                    """转换为str"""
+            </div>
+            <p>将任意对象转换为字符串。</p>
 
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
-</dl>
-</td></tr></table></td></tr></table><p>
-<table class="section">
-<tr class="decor functions-decor heading-text">
-<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
-    
-<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
-<td class="singlecolumn"><dl><dt><a name="-conversion_cache"><strong>conversion_cache</strong></a>(func)</dt><dd><span class="code">缓存转换结果的装饰器<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;func:&nbsp;转换函数<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;装饰后的函数</span></dd></dl>
- <dl><dt><a name="-e2e_dict"><strong>e2e_dict</strong></a>(obj=None)</dt><dd><span class="code">转换为dict<br>
-&nbsp;<br>
-Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;dictionary,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为None<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;转换后的字典</span></dd></dl>
- <dl><dt><a name="-e2e_float"><strong>e2e_float</strong></a>(obj=0.0)</dt><dd><span class="code">转换为float<br>
-&nbsp;<br>
-Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;float,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为0.0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;转换后的浮点数</span></dd></dl>
- <dl><dt><a name="-e2e_int"><strong>e2e_int</strong></a>(obj=0)</dt><dd><span class="code">转换为int<br>
-&nbsp;<br>
-Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;integer,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为0<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;转换后的整数</span></dd></dl>
- <dl><dt><a name="-e2e_list"><strong>e2e_list</strong></a>(obj=None)</dt><dd><span class="code">转换为list<br>
-&nbsp;<br>
-Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;list,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为None<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;list:&nbsp;转换后的列表</span></dd></dl>
- <dl><dt><a name="-e2e_set"><strong>e2e_set</strong></a>(obj=None)</dt><dd><span class="code">转换为set<br>
-&nbsp;<br>
-Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;set,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为None<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;set:&nbsp;转换后的集合</span></dd></dl>
- <dl><dt><a name="-e2e_str"><strong>e2e_str</strong></a>(obj='')</dt><dd><span class="code">转换为str<br>
-&nbsp;<br>
-Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;string,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为空字符串<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;转换后的字符串</span></dd></dl>
- <dl><dt><a name="-e2e_tuple"><strong>e2e_tuple</strong></a>(obj=())</dt><dd><span class="code">转换为tuple<br>
-&nbsp;<br>
-Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;tuple,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
-&nbsp;<br>
-Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为空元组<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;转换后的元组</span></dd></dl>
-</td></tr></table>
+            <h5>to_int(obj)</h5>
+            <div class="function-signature">
+                @staticmethod
+                @conversion_cache
+                def to_int(obj):
+                    """转换为int"""
+            </div>
+            <p>将任意对象转换为整数。</p>
+
+            <h5>to_float(obj)</h5>
+            <div class="function-signature">
+                @staticmethod
+                @conversion_cache
+                def to_float(obj):
+                    """转换为float"""
+            </div>
+            <p>将任意对象转换为浮点数。</p>
+
+            <h5>to_dict(obj)</h5>
+            <div class="function-signature">
+                @staticmethod
+                @conversion_cache
+                def to_dict(obj):
+                    """转换为dict"""
+            </div>
+            <p>将任意对象转换为字典。</p>
+
+            <h5>to_set(obj)</h5>
+            <div class="function-signature">
+                @staticmethod
+                @conversion_cache
+                def to_set(obj):
+                    """转换为set"""
+            </div>
+            <p>将任意对象转换为集合。</p>
+
+            <h5>to_tuple(obj)</h5>
+            <div class="function-signature">
+                @staticmethod
+                @conversion_cache
+                def to_tuple(obj):
+                    """转换为tuple"""
+            </div>
+            <p>将任意对象转换为元组。</p>
+
+            <h2>转换函数</h2>
+            <p>模块提供了一系列与Python内置函数兼容的转换函数，这些函数是对 TypeConverter 类方法的封装，使用更加方便。</p>
+
+            <h3>e2e_list(obj=None)</h3>
+            <div class="function-signature">
+                def e2e_list(obj=None):
+                    """转换为list"""
+            </div>
+            <p>将任意对象转换为列表，默认为空列表。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any, optional</td>
+                    <td>要转换的对象，默认为None</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> list - 转换后的列表
+            </div>
+            <div class="example-section">
+                <strong>示例：</strong>
+                <pre><code>from everything2everything import e2e_list
+
+# 基本类型转换
+e2e_list(123)  # 输出: [123]
+e2e_list(None)  # 输出: []
+e2e_list("hello")  # 输出: ['h', 'e', 'l', 'l', 'o']
+
+# 容器类型转换
+e2e_list({"a": 1, "b": 2})  # 输出: [("a", 1), ("b", 2)]
+
+# 第三方库类型转换
+import numpy as np
+e2e_list(np.array([1, 2, 3]))  # 输出: [1, 2, 3]</code></pre>
+            </div>
+
+            <h3>e2e_str(obj="")</h3>
+            <div class="function-signature">
+                def e2e_str(obj=""):
+                    """转换为str"""
+            </div>
+            <p>将任意对象转换为字符串，默认为空字符串。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any, optional</td>
+                    <td>要转换的对象，默认为空字符串</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> str - 转换后的字符串
+            </div>
+
+            <h3>e2e_int(obj=0)</h3>
+            <div class="function-signature">
+                def e2e_int(obj=0):
+                    """转换为int"""
+            </div>
+            <p>将任意对象转换为整数，默认为0。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any, optional</td>
+                    <td>要转换的对象，默认为0</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> int - 转换后的整数
+            </div>
+
+            <h3>e2e_float(obj=0.0)</h3>
+            <div class="function-signature">
+                def e2e_float(obj=0.0):
+                    """转换为float"""
+            </div>
+            <p>将任意对象转换为浮点数，默认为0.0。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any, optional</td>
+                    <td>要转换的对象，默认为0.0</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> float - 转换后的浮点数
+            </div>
+
+            <h3>e2e_dict(obj=None)</h3>
+            <div class="function-signature">
+                def e2e_dict(obj=None):
+                    """转换为dict"""
+            </div>
+            <p>将任意对象转换为字典，默认为空字典。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any, optional</td>
+                    <td>要转换的对象，默认为None</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> dict - 转换后的字典
+            </div>
+
+            <h3>e2e_set(obj=None)</h3>
+            <div class="function-signature">
+                def e2e_set(obj=None):
+                    """转换为set"""
+            </div>
+            <p>将任意对象转换为集合，默认为空集合。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any, optional</td>
+                    <td>要转换的对象，默认为None</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> set - 转换后的集合
+            </div>
+
+            <h3>e2e_tuple(obj=())</h3>
+            <div class="function-signature">
+                def e2e_tuple(obj=()):
+                    """转换为tuple"""
+            </div>
+            <p>将任意对象转换为元组，默认为空元组。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>obj</td>
+                    <td>Any, optional</td>
+                    <td>要转换的对象，默认为空元组</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> tuple - 转换后的元组
+            </div>
+
+            <h2>辅助函数</h2>
+
+            <h3>conversion_cache(func)</h3>
+            <div class="function-signature">
+                def conversion_cache(func):
+                    """缓存转换结果的装饰器"""
+            </div>
+            <p>缓存转换结果的装饰器，用于提升转换性能，避免重复转换。</p>
+            <table class="param-table">
+                <tr>
+                    <th>参数</th>
+                    <th>类型</th>
+                    <th>描述</th>
+                </tr>
+                <tr>
+                    <td>func</td>
+                    <td>callable</td>
+                    <td>转换函数</td>
+                </tr>
+            </table>
+            <div class="returns-section">
+                <strong>返回值：</strong> callable - 装饰后的函数
+            </div>
+            <div class="note">
+                <strong>注意：</strong> 装饰器使用了简单的字典缓存，并实现了缓存大小限制，当缓存超过1000条时，会清理一半的条目。
+            </div>
+
+            <h2>类型转换规则</h2>
+
+            <h3>标准类型转换</h3>
+            <div class="card">
+                <h4>1. 转换为 list</h4>
+                <ul>
+                    <li><strong>list</strong>: 保持不变</li>
+                    <li><strong>None</strong>: []</li>
+                    <li><strong>str/bytes</strong>: 转换为字符/字节列表</li>
+                    <li><strong>dict</strong>: 转换为键值对元组列表</li>
+                    <li><strong>int/float/bool</strong>: 转换为单元素列表</li>
+                    <li><strong>tuple/set</strong>: 转换为列表</li>
+                    <li><strong>其他</strong>: 尝试使用原始 list() 函数</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. 转换为 str</h4>
+                <ul>
+                    <li><strong>str</strong>: 保持不变</li>
+                    <li><strong>None</strong>: ""</li>
+                    <li><strong>bool</strong>: 转换为小写字符串 ("true"/"false")</li>
+                    <li><strong>int/float/list/tuple/dict/set</strong>: 使用原始 str() 函数</li>
+                    <li><strong>其他</strong>: 尝试使用原始 str() 函数</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. 转换为 int</h4>
+                <ul>
+                    <li><strong>int</strong>: 保持不变</li>
+                    <li><strong>None</strong>: 0</li>
+                    <li><strong>bool</strong>: 转换为 1/0</li>
+                    <li><strong>float</strong>: 截断小数部分</li>
+                    <li><strong>str</strong>: 尝试转换为整数</li>
+                    <li><strong>空容器</strong>: 0</li>
+                    <li><strong>单元素容器</strong>: 转换容器内元素</li>
+                    <li><strong>多元素容器</strong>: 抛出 TypeError</li>
+                    <li><strong>其他</strong>: 尝试使用原始 int() 函数</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>4. 转换为 float</h4>
+                <ul>
+                    <li><strong>float</strong>: 保持不变</li>
+                    <li><strong>None</strong>: 0.0</li>
+                    <li><strong>bool</strong>: 转换为 1.0/0.0</li>
+                    <li><strong>int</strong>: 转换为浮点数</li>
+                    <li><strong>str</strong>: 尝试转换为浮点数</li>
+                    <li><strong>空容器</strong>: 0.0</li>
+                    <li><strong>单元素容器</strong>: 转换容器内元素</li>
+                    <li><strong>多元素容器</strong>: 抛出 TypeError</li>
+                    <li><strong>其他</strong>: 尝试使用原始 float() 函数</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>5. 转换为 dict</h4>
+                <ul>
+                    <li><strong>dict</strong>: 保持不变</li>
+                    <li><strong>None</strong>: {}</li>
+                    <li><strong>list/tuple</strong>: 尝试转换为字典，失败则转换为索引字典</li>
+                    <li><strong>str/int/float/bool/set</strong>: 转换为 {"value": 值}</li>
+                    <li><strong>其他</strong>: 尝试使用原始 dict() 函数</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>6. 转换为 set</h4>
+                <ul>
+                    <li><strong>set</strong>: 保持不变</li>
+                    <li><strong>None</strong>: set()</li>
+                    <li><strong>str/bytes</strong>: 转换为字符/字节集合</li>
+                    <li><strong>int/float/bool</strong>: 转换为单元素集合</li>
+                    <li><strong>list/tuple/dict</strong>: 转换为集合</li>
+                    <li><strong>其他</strong>: 尝试使用原始 set() 函数</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>7. 转换为 tuple</h4>
+                <ul>
+                    <li><strong>tuple</strong>: 保持不变</li>
+                    <li><strong>None</strong>: ()</li>
+                    <li><strong>str/bytes</strong>: 转换为字符/字节元组</li>
+                    <li><strong>int/float/bool</strong>: 转换为单元素元组</li>
+                    <li><strong>list/set/dict</strong>: 转换为元组</li>
+                    <li><strong>其他</strong>: 尝试使用原始 tuple() 函数</li>
+                </ul>
+            </div>
+
+            <h3>第三方库类型转换</h3>
+            <p>模块支持以下第三方库类型之间的互转：</p>
+            <ul>
+                <li>numpy</li>
+                <li>cupy</li>
+                <li>scipy</li>
+                <li>pandas</li>
+                <li>torch</li>
+                <li>xarray</li>
+                <li>jax</li>
+                <li>tensorflow</li>
+            </ul>
+
+            <div class="note">
+                <strong>注意：</strong> 模块会自动检测第三方库是否可用，当库不可用时会给出明确的错误提示，不会导致程序崩溃。
+            </div>
+
+            <h2>性能优化</h2>
+            <div class="card">
+                <h4>缓存机制</h4>
+                <p>模块使用了 <code>conversion_cache</code> 装饰器，对转换结果进行缓存，避免重复转换，提升性能。</p>
+                
+                <h4>直接转换路径</h4>
+                <p>在 <code>convert</code> 方法中，实现了一些直接转换路径，避免不必要的中间转换，例如：</p>
+                <ul>
+                    <li>torch → cupy</li>
+                    <li>cupy → torch</li>
+                    <li>torch → tensorflow</li>
+                    <li>tensorflow → torch</li>
+                    <li>jax → torch</li>
+                    <li>torch → jax</li>
+                    <li>jax → tensorflow</li>
+                    <li>tensorflow → jax</li>
+                    <li>pandas → xarray</li>
+                    <li>xarray → pandas</li>
+                </ul>
+                
+                <h4>延迟导入</h4>
+                <p>第三方库采用延迟导入的方式，只有在需要时才会导入，减少启动时间和内存占用。</p>
+            </div>
+
+            <h2>使用示例</h2>
+
+            <h3>基本使用</h3>
+            <pre><code>from everything2everything import (
+    e2e_list, e2e_str, e2e_int, e2e_float, e2e_dict, e2e_set, e2e_tuple
+)
+
+# 示例 1：基本类型转换
+print(e2e_list(123))  # 输出: [123]
+print(e2e_str(None))  # 输出: ""
+print(e2e_int("123"))  # 输出: 123
+print(e2e_float(True))  # 输出: 1.0
+
+# 示例 2：容器类型转换
+print(e2e_list({"a": 1, "b": 2}))  # 输出: [("a", 1), ("b", 2)]
+print(e2e_dict([1, 2, 3]))  # 输出: {0: 1, 1: 2, 2: 3}
+print(e2e_set("hello"))  # 输出: {'h', 'e', 'l', 'o'}
+
+# 示例 3：双向转换
+print(e2e_list(e2e_tuple([1, 2, 3])))  # 输出: [1, 2, 3]
+print(e2e_dict(e2e_list({"a": 1, "b": 2})))  # 输出: {0: ("a", 1), 1: ("b", 2)}</code></pre>
+
+            <h3>第三方库类型转换</h3>
+            <pre><code>from everything2everything import TypeConverter
+import numpy as np
+import torch
+
+# 示例 1：numpy 与 torch 互转
+arr = np.array([1, 2, 3])
+tensor = TypeConverter.numpy_to_torch(arr)
+print(type(tensor))  # 输出: &lt;class 'torch.Tensor'&gt;
+
+arr2 = TypeConverter.torch_to_numpy(tensor)
+print(type(arr2))  # 输出: &lt;class 'numpy.ndarray'&gt;
+
+# 示例 2：使用通用转换方法
+result = TypeConverter.convert(arr, 'torch')  # 转换为torch张量
+print(type(result))  # 输出: &lt;class 'torch.Tensor'&gt;
+
+# 示例 3：numpy 与 pandas 互转
+import pandas as pd
+series = TypeConverter.numpy_to_pandas(arr)
+print(type(series))  # 输出: &lt;class 'pandas.Series'&gt;
+
+arr3 = TypeConverter.pandas_to_numpy(series)
+print(type(arr3))  # 输出: &lt;class 'numpy.ndarray'&gt;</code></pre>
+
+            <h2>总结</h2>
+            <p><code>everything2everything.core</code> 模块是一个功能强大、设计优雅的类型转换兼容层，它解决了Python中类型转换的各种问题，特别是在处理第三方库类型时的复杂性。</p>
+            <p>主要优势包括：</p>
+            <ul>
+                <li><strong>全面的类型支持</strong>：支持所有Python标准数据类型和主流第三方库类型</li>
+                <li><strong>双向转换</strong>：提供任意类型之间的双向转换能力</li>
+                <li><strong>类型安全</strong>：提供明确的错误提示和类型检查</li>
+                <li><strong>高性能</strong>：内置缓存机制，避免重复转换</li>
+                <li><strong>无缝集成</strong>：与Python内置函数兼容，可直接替换使用</li>
+                <li><strong>智能处理</strong>：自动处理不同库之间的转换细节</li>
+            </ul>
+            <p>这个模块为Python开发者提供了一个统一、简洁的类型转换接口，大大简化了代码编写，提高了开发效率。</p>
         </div>
     </div>
 
@@ -663,5 +1232,23 @@ Returns:<br>
                 });
             });
         });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
-</body></html>
+</body>
+</html>
