@@ -1,14 +1,332 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>Python: module e2e_type_converter.core</title>
-</head><body>
+<title>Python: module everything2everything.core</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    /* 导航栏 */
+    .navbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 20px;
+    }
+    .navbar-brand {
+        display: flex;
+        align-items: center;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #3a86ff;
+    }
+    .logo-icon {
+        margin-right: 10px;
+        font-size: 1.8rem;
+    }
+    .navbar-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+    .navbar-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .navbar-links a:hover {
+        color: #3a86ff;
+    }
+    .btn-github {
+        background-color: #24292e;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+    .btn-github:hover {
+        background-color: #2b3137;
+        color: white;
+    }
+    /* 文档内容 */
+    .doc-content {
+        background-color: white;
+        margin: 2rem 0;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    /* 标题样式 */
+    h1, h2, h3, h4 {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    h1 {
+        font-size: 2rem;
+        border-bottom: 2px solid #3a86ff;
+        padding-bottom: 0.5rem;
+        margin-bottom: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        color: #3a86ff;
+    }
+    h3 {
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+    }
+    /* 段落和列表 */
+    p {
+        margin-bottom: 1rem;
+        color: #666;
+    }
+    ul, ol {
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+        color: #666;
+    }
+    li {
+        margin-bottom: 0.5rem;
+    }
+    /* 代码样式 */
+    code {
+        background-color: #f8f9fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.9rem;
+        color: #333;
+    }
+    pre {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        overflow-x: auto;
+        border-left: 4px solid #3a86ff;
+        margin-bottom: 1.5rem;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.9rem;
+        position: relative;
+    }
+    /* 表格样式 */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1.5rem;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    th, td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    th {
+        background-color: #3a86ff;
+        color: white;
+        font-weight: 600;
+    }
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    /* 链接样式 */
+    a {
+        color: #3a86ff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    /* 代码块复制按钮 */
+    .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+        border-radius: 4px;
+        padding: 6px 10px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .copy-button:hover {
+        background-color: #3a86ff;
+        color: white;
+    }
+    /* 页脚 */
+    footer {
+        background-color: #f5f5f5;
+        padding: 2rem 0;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 2rem;
+    }
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .footer-logo {
+        max-width: 300px;
+    }
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .footer-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+        color: #3a86ff;
+    }
+    .footer-bottom {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e0e0e0;
+        text-align: center;
+        color: #666;
+    }
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .navbar .container {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .navbar-links {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .doc-content {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+        .footer-content {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+    /* 自定义样式覆盖 */
+    .heading {
+        display: none;
+    }
+    .section {
+        margin-bottom: 2rem;
+    }
+    .bigsection {
+        font-size: 1.5rem;
+        color: #3a86ff;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .code {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        background-color: #f8f9fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+    }
+    .singlecolumn {
+        width: 100%;
+    }
+    dl {
+        margin-bottom: 1.5rem;
+    }
+    dt {
+        font-weight: 600;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+    dd {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+        color: #666;
+    }
+    hr {
+        border: 1px solid #e0e0e0;
+        margin: 2rem 0;
+    }
+</style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <span>everything2everything</span>
+                </div>
+            </div>
+            <div class="navbar-links">
+                <a href="../index.html">主页</a>
+                <a href="../index.html#features">特性</a>
+                <a href="../index.html#quickstart">快速上手</a>
+                <a href="index.html">API文档</a>
+                <a href="https://github.com/John-is-playing/everything2everything" target="_blank" class="btn-github">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="doc-content">
 
 <table class="heading">
 <tr class="heading-text decor">
-<td class="title">&nbsp;<br><strong class="title"><a href="e2e_type_converter.html" class="white">e2e_type_converter</a>.core</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cpotato%5Cdocuments%5Ctrae_projects%5Cjohn-is-playing.github.io%5Ce2e_type_converter%5Ccore.py">c:\users\potato\documents\trae_projects\john-is-playing.github.io\e2e_type_converter\core.py</a></td></tr></table>
+<td class="title">&nbsp;<br><strong class="title"><a href="everything2everything.html" class="white">everything2everything</a>.core</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cpotato%5Cdocuments%5Ctrae_projects%5Cjohn-is-playing.github.io%5Ceverything2everything%5Ccore.py">c:\users\potato\documents\trae_projects\john-is-playing.github.io\everything2everything\core.py</a></td></tr></table>
     <p><span class="code">核心类型转换实现<br>
 &nbsp;<br>
 This&nbsp;module&nbsp;contains&nbsp;the&nbsp;core&nbsp;implementation&nbsp;of&nbsp;the&nbsp;type&nbsp;conversion&nbsp;compatibility&nbsp;layer,<br>
@@ -31,7 +349,7 @@ including&nbsp;support&nbsp;for&nbsp;standard&nbsp;Python&nbsp;types&nbsp;and&nb
 <dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
 </dt><dd>
 <dl>
-<dt class="heading-text"><a href="e2e_type_converter.core.html#TypeConverter">TypeConverter</a>
+<dt class="heading-text"><a href="everything2everything.core.html#TypeConverter">TypeConverter</a>
 </dt></dl>
 </dd>
 </dl>
@@ -294,4 +612,56 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;转换后的元组</span></dd></dl>
 </td></tr></table>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <span>everything2everything</span>
+                    </div>
+                    <p>EveryThing to EveryThing 类型转换兼容层</p>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html">主页</a>
+                    <a href="../index.html#features">特性</a>
+                    <a href="../index.html#quickstart">快速上手</a>
+                    <a href="index.html">API文档</a>
+                    <a href="https://github.com/John-is-playing/everything2everything" target="_blank">GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 everything2everything. 由 John-is-playing 开发。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 为代码块添加复制按钮
+        document.querySelectorAll('pre').forEach(block => {
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+            copyButton.title = '复制代码';
+            block.appendChild(copyButton);
+
+            copyButton.addEventListener('click', function() {
+                const code = block.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    copyButton.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(() => {
+                        copyButton.innerHTML = '<i class="fas fa-copy"></i>';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('复制失败:', err);
+                });
+            });
+        });
+    </script>
 </body></html>
