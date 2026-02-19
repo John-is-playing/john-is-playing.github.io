@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- GitHub Cards 库 -->
+    <script type="module" async src="https://esm.sh/@tsukina-7mochi/github-cards"></script>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -39,6 +41,12 @@
             <div class="hero-content">
                 <h1>EveryThing to EveryThing 类型转换兼容层</h1>
                 <p class="hero-subtitle">一站式解决Python中所有类型转换问题，支持标准类型与第三方库类型的无缝互转</p>
+                
+                <!-- GitHub 仓库卡片 -->
+                <div style="margin: 2rem 0;">
+                    <gh-repo-card name="John-is-playing/everything2everything"></gh-repo-card>
+                </div>
+                
                 <div class="hero-buttons">
                     <a href="#quickstart" class="btn-primary">快速开始</a>
                     <a href="docs/" class="btn-secondary">API文档</a>
@@ -195,9 +203,34 @@ print(type(result))  # 输出: &lt;class 'torch.Tensor'&gt;</code></pre>
         <div class="container">
             <h2>贡献与支持</h2>
             <p>如果您喜欢这个项目，欢迎给我们点个Star，或者参与贡献代码！</p>
-            <a href="https://github.com/John-is-playing/everything2everything" target="_blank" class="btn-github-large">
-                <i class="fab fa-github"></i> Star on GitHub
-            </a>
+            
+            <!-- GitHub 仓库卡片 -->
+            <div class="github-card">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                    <img src="https://github.com/John-is-playing.png" alt="John-is-playing">
+                    <div>
+                        <h3>John-is-playing/everything2everything</h3>
+                        <p>EveryThing to EveryThing 类型转换兼容层</p>
+                    </div>
+                </div>
+                <div class="github-stats">
+                    <a href="https://github.com/John-is-playing/everything2everything/stargazers" target="_blank">
+                        <i class="fas fa-star"></i>
+                        <span>Star</span>
+                    </a>
+                    <a href="https://github.com/John-is-playing/everything2everything/forks" target="_blank">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Fork</span>
+                    </a>
+                    <a href="https://github.com/John-is-playing/everything2everything/issues" target="_blank">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Issues</span>
+                    </a>
+                </div>
+                <a href="https://github.com/John-is-playing/everything2everything" target="_blank" class="btn-github-large">
+                    <i class="fab fa-github"></i> Star on GitHub
+                </a>
+            </div>
         </div>
     </section>
 
