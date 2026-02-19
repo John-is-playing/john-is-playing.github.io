@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module e2e_type_converter.core</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="e2e_type_converter.html" class="white">e2e_type_converter</a>.core</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cpotato%5Cdocuments%5Ctrae_projects%5Cjohn-is-playing.github.io%5Ce2e_type_converter%5Ccore.py">c:\users\potato\documents\trae_projects\john-is-playing.github.io\e2e_type_converter\core.py</a></td></tr></table>
+    <p><span class="code">核心类型转换实现<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;contains&nbsp;the&nbsp;core&nbsp;implementation&nbsp;of&nbsp;the&nbsp;type&nbsp;conversion&nbsp;compatibility&nbsp;layer,<br>
+including&nbsp;support&nbsp;for&nbsp;standard&nbsp;Python&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="builtins.html">builtins</a><br>
+</td><td class="multicolumn"><a href="sys.html">sys</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="e2e_type_converter.core.html#TypeConverter">TypeConverter</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="TypeConverter">class <strong>TypeConverter</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">类型转换兼容层<br>
+&nbsp;<br>
+A&nbsp;comprehensive&nbsp;type&nbsp;conversion&nbsp;compatibility&nbsp;layer&nbsp;that&nbsp;supports&nbsp;bidirectional<br>
+conversion&nbsp;between&nbsp;all&nbsp;standard&nbsp;Python&nbsp;data&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Static methods defined here:<br>
+<dl><dt><a name="TypeConverter-convert"><strong>convert</strong></a>(obj, target_type)</dt><dd><span class="code">通用类型转换方法，支持第三方库类型之间的互转<br>
+&nbsp;<br>
+Generic&nbsp;type&nbsp;conversion&nbsp;method&nbsp;that&nbsp;supports&nbsp;conversion&nbsp;between&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象<br>
+&nbsp;&nbsp;&nbsp;&nbsp;target_type:&nbsp;目标类型，可以是以下字符串之一：<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'numpy',&nbsp;'cupy',&nbsp;'scipy',&nbsp;'pandas',&nbsp;'torch',&nbsp;'xarray',&nbsp;'jax',&nbsp;'tensorflow'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;转换后的对象<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;如果目标类型无效<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果无法转换输入对象</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-jax_to_numpy"><strong>jax_to_numpy</strong></a>(obj)</dt><dd><span class="code">将jax数组转换为numpy数组<br>
+&nbsp;<br>
+Convert&nbsp;jax&nbsp;array&nbsp;to&nbsp;numpy&nbsp;array.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;jax.numpy.ndarray&nbsp;-&nbsp;要转换的jax数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是jax数组</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-numpy_to_jax"><strong>numpy_to_jax</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为jax数组<br>
+&nbsp;<br>
+Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;jax&nbsp;array.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;jax.numpy.ndarray&nbsp;-&nbsp;转换后的jax数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-numpy_to_pandas"><strong>numpy_to_pandas</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为pandas对象<br>
+&nbsp;<br>
+Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;pandas&nbsp;Series&nbsp;or&nbsp;DataFrame.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pandas.Series&nbsp;or&nbsp;pandas.DataFrame&nbsp;-&nbsp;转换后的pandas对象<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;如果输入数组维度大于2</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-numpy_to_tensorflow"><strong>numpy_to_tensorflow</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为tensorflow&nbsp;Tensor<br>
+&nbsp;<br>
+Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;tensorflow&nbsp;Tensor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tensorflow.Tensor&nbsp;-&nbsp;转换后的tensorflow张量<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-numpy_to_torch"><strong>numpy_to_torch</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为torch&nbsp;Tensor<br>
+&nbsp;<br>
+Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;torch&nbsp;Tensor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;torch.Tensor&nbsp;-&nbsp;转换后的torch张量<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-numpy_to_xarray"><strong>numpy_to_xarray</strong></a>(obj)</dt><dd><span class="code">将numpy数组转换为xarray&nbsp;DataArray<br>
+&nbsp;<br>
+Convert&nbsp;numpy&nbsp;array&nbsp;to&nbsp;xarray&nbsp;DataArray&nbsp;with&nbsp;automatically&nbsp;generated&nbsp;dimensions&nbsp;and&nbsp;coordinates.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;numpy.ndarray&nbsp;-&nbsp;要转换的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;xarray.DataArray&nbsp;-&nbsp;转换后的xarray&nbsp;DataArray<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是numpy数组</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-pandas_to_numpy"><strong>pandas_to_numpy</strong></a>(obj)</dt><dd><span class="code">将pandas对象转换为numpy数组<br>
+&nbsp;<br>
+Convert&nbsp;pandas&nbsp;DataFrame&nbsp;or&nbsp;Series&nbsp;to&nbsp;numpy&nbsp;array.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;pandas.DataFrame&nbsp;or&nbsp;pandas.Series&nbsp;-&nbsp;要转换的pandas对象<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是pandas对象</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-tensorflow_to_numpy"><strong>tensorflow_to_numpy</strong></a>(obj)</dt><dd><span class="code">将tensorflow&nbsp;Tensor转换为numpy数组<br>
+&nbsp;<br>
+Convert&nbsp;tensorflow&nbsp;Tensor&nbsp;to&nbsp;numpy&nbsp;array.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;tensorflow.Tensor&nbsp;-&nbsp;要转换的tensorflow张量<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是tensorflow张量</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-to_dict"><strong>to_dict</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+
+<dl><dt><a name="TypeConverter-to_float"><strong>to_float</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+
+<dl><dt><a name="TypeConverter-to_int"><strong>to_int</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+
+<dl><dt><a name="TypeConverter-to_list"><strong>to_list</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+
+<dl><dt><a name="TypeConverter-to_set"><strong>to_set</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+
+<dl><dt><a name="TypeConverter-to_str"><strong>to_str</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+
+<dl><dt><a name="TypeConverter-to_tuple"><strong>to_tuple</strong></a> = cached_func(*args, **kwargs)<span class="grey"><span class="heading-text"> from conversion_cache.<locals></span></span></dt></dl>
+
+<dl><dt><a name="TypeConverter-torch_to_numpy"><strong>torch_to_numpy</strong></a>(obj)</dt><dd><span class="code">将torch&nbsp;Tensor转换为numpy数组<br>
+&nbsp;<br>
+Convert&nbsp;torch&nbsp;Tensor&nbsp;to&nbsp;numpy&nbsp;array,&nbsp;detaching&nbsp;from&nbsp;computation&nbsp;graph&nbsp;if&nbsp;necessary.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;torch.Tensor&nbsp;-&nbsp;要转换的torch张量<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是torch张量</span></dd></dl>
+
+<dl><dt><a name="TypeConverter-xarray_to_numpy"><strong>xarray_to_numpy</strong></a>(obj)</dt><dd><span class="code">将xarray&nbsp;DataArray转换为numpy数组<br>
+&nbsp;<br>
+Convert&nbsp;xarray&nbsp;DataArray&nbsp;or&nbsp;Dataset&nbsp;to&nbsp;numpy&nbsp;array.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;xarray.DataArray&nbsp;or&nbsp;xarray.Dataset&nbsp;-&nbsp;要转换的xarray对象<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;numpy.ndarray&nbsp;-&nbsp;转换后的numpy数组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeError:&nbsp;如果输入不是xarray对象<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;如果输入是空的xarray&nbsp;Dataset</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-conversion_cache"><strong>conversion_cache</strong></a>(func)</dt><dd><span class="code">缓存转换结果的装饰器<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;func:&nbsp;转换函数<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;装饰后的函数</span></dd></dl>
+ <dl><dt><a name="-e2e_dict"><strong>e2e_dict</strong></a>(obj=None)</dt><dd><span class="code">转换为dict<br>
+&nbsp;<br>
+Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;dictionary,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;转换后的字典</span></dd></dl>
+ <dl><dt><a name="-e2e_float"><strong>e2e_float</strong></a>(obj=0.0)</dt><dd><span class="code">转换为float<br>
+&nbsp;<br>
+Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;float,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为0.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;转换后的浮点数</span></dd></dl>
+ <dl><dt><a name="-e2e_int"><strong>e2e_int</strong></a>(obj=0)</dt><dd><span class="code">转换为int<br>
+&nbsp;<br>
+Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;integer,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;转换后的整数</span></dd></dl>
+ <dl><dt><a name="-e2e_list"><strong>e2e_list</strong></a>(obj=None)</dt><dd><span class="code">转换为list<br>
+&nbsp;<br>
+Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;list,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list:&nbsp;转换后的列表</span></dd></dl>
+ <dl><dt><a name="-e2e_set"><strong>e2e_set</strong></a>(obj=None)</dt><dd><span class="code">转换为set<br>
+&nbsp;<br>
+Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;set,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;set:&nbsp;转换后的集合</span></dd></dl>
+ <dl><dt><a name="-e2e_str"><strong>e2e_str</strong></a>(obj='')</dt><dd><span class="code">转换为str<br>
+&nbsp;<br>
+Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;string,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为空字符串<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;转换后的字符串</span></dd></dl>
+ <dl><dt><a name="-e2e_tuple"><strong>e2e_tuple</strong></a>(obj=())</dt><dd><span class="code">转换为tuple<br>
+&nbsp;<br>
+Convert&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;tuple,&nbsp;with&nbsp;support&nbsp;for&nbsp;all&nbsp;standard&nbsp;types&nbsp;and&nbsp;third-party&nbsp;library&nbsp;types.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;obj:&nbsp;要转换的对象，默认为空元组<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;转换后的元组</span></dd></dl>
+</td></tr></table>
+</body></html>

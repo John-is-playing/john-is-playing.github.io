@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e2e_type_converter - 全能类型转换兼容层</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <span>e2e_type_converter</span>
+                </div>
+            </div>
+            <div class="navbar-links">
+                <a href="#features">特性</a>
+                <a href="#quickstart">快速上手</a>
+                <a href="docs/">API文档</a>
+                <a href="https://github.com/john-is-playing/e2e_type_converter" target="_blank" class="btn-github">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>EveryThing to EveryThing 类型转换兼容层</h1>
+                <p class="hero-subtitle">一站式解决Python中所有类型转换问题，支持标准类型与第三方库类型的无缝互转</p>
+                <div class="hero-buttons">
+                    <a href="#quickstart" class="btn-primary">快速开始</a>
+                    <a href="docs/" class="btn-secondary">API文档</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特性区域 -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>核心特性</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>全面的类型支持</h3>
+                    <p>支持所有Python标准数据类型和主流第三方库类型，包括numpy、pandas、torch、tensorflow等</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>双向转换</h3>
+                    <p>提供任意类型之间的双向转换能力，无需手动处理中间格式</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>类型安全</h3>
+                    <p>提供明确的错误提示和类型检查，确保转换过程的安全性</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>高性能</h3>
+                    <p>内置缓存机制，避免重复转换，提升性能</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>无缝集成</h3>
+                    <p>保持与Python内置函数的兼容性，可直接替换使用</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>智能处理</h3>
+                    <p>自动处理不同库之间的转换细节，如GPU张量的设备管理</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 快速上手区域 -->
+    <section id="quickstart" class="quickstart">
+        <div class="container">
+            <h2>快速上手</h2>
+            
+            <div class="quickstart-section">
+                <h3>安装</h3>
+                <div class="code-block">
+                    <pre><code>pip install e2e-type-converter</code></pre>
+                </div>
+            </div>
+
+            <div class="quickstart-section">
+                <h3>基本使用</h3>
+                <div class="code-block">
+                    <pre><code>from e2e_type_converter import e2e_list, e2e_str, e2e_int
+
+# 基本类型转换
+e2e_list(123)  # 输出: [123]
+e2e_str(None)  # 输出: ""
+e2e_int("123")  # 输出: 123</code></pre>
+                </div>
+            </div>
+
+            <div class="quickstart-section">
+                <h3>第三方库类型转换</h3>
+                <div class="code-block">
+                    <pre><code>from e2e_type_converter import TypeConverter
+import numpy as np
+import torch
+
+# numpy 转换为 torch
+arr = np.array([1, 2, 3])
+tensor = TypeConverter.numpy_to_torch(arr)
+print(type(tensor))  # 输出: &lt;class 'torch.Tensor'&gt;
+
+# torch 转换为 numpy
+tensor = torch.tensor([4, 5, 6])
+arr = TypeConverter.torch_to_numpy(tensor)
+print(type(arr))  # 输出: &lt;class 'numpy.ndarray'&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="quickstart-section">
+                <h3>通用转换方法</h3>
+                <div class="code-block">
+                    <pre><code>from e2e_type_converter import TypeConverter
+import numpy as np
+
+# 使用通用转换方法
+arr = np.array([1, 2, 3])
+result = TypeConverter.convert(arr, 'torch')  # 转换为torch张量
+print(type(result))  # 输出: &lt;class 'torch.Tensor'&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持的类型 -->
+    <section class="supported-types">
+        <div class="container">
+            <h2>支持的类型</h2>
+            <div class="types-grid">
+                <div class="type-card">
+                    <h3>标准类型</h3>
+                    <ul>
+                        <li>list</li>
+                        <li>str</li>
+                        <li>int</li>
+                        <li>float</li>
+                        <li>dict</li>
+                        <li>set</li>
+                        <li>tuple</li>
+                    </ul>
+                </div>
+                <div class="type-card">
+                    <h3>第三方库</h3>
+                    <ul>
+                        <li>numpy</li>
+                        <li>cupy</li>
+                        <li>scipy</li>
+                        <li>pandas</li>
+                        <li>torch</li>
+                        <li>xarray</li>
+                        <li>jax</li>
+                        <li>tensorflow</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub 召唤区域 -->
+    <section class="github-callout">
+        <div class="container">
+            <h2>贡献与支持</h2>
+            <p>如果您喜欢这个项目，欢迎给我们点个Star，或者参与贡献代码！</p>
+            <a href="https://github.com/john-is-playing/e2e_type_converter" target="_blank" class="btn-github-large">
+                <i class="fab fa-github"></i> Star on GitHub
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <span>e2e_type_converter</span>
+                    </div>
+                    <p>EveryThing to EveryThing 类型转换兼容层</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#features">特性</a>
+                    <a href="#quickstart">快速上手</a>
+                    <a href="docs/">API文档</a>
+                    <a href="https://github.com/john-is-playing/e2e_type_converter" target="_blank">GitHub</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 e2e_type_converter. 由 John-is-playing 开发。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
